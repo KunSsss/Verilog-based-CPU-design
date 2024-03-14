@@ -72,7 +72,3 @@ alu alu1(
 	.alu_out(alu_out ) 
 );							
 endmodule				
-				
-/*
-	顶层模块 datapath
-*/
