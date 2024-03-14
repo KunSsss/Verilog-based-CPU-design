@@ -16,21 +16,12 @@ module state_transition(
 );
 
 input clk, rst ;
-input en_in ; // 表示此时有指令需要处理，从空闲状态转为取指状态
-input en1 ; // 接收指令寄存器的使能，只有有指令来临时，才会进行状态转移
-input en2 ; // 接收alu的输出
-input [1:0] rd ; // destination register 目的寄存器
-input [3:0] opcode ; // 指令中的操作码，不同的操作码对应不同的next_state
+input en_in ; 
+input en1 ; 
+input en2 ; 
+input [1:0] rd ; 
+input [3:0] opcode ; 
 
-/*
-	en_ram_in: RAM输入使能，告诉RAM此时有数据输入
-	en_group_pulse: 与datapath同步时钟信号？
-	en_pc_pulse: 连datapath的en_pc_pulse
-	alu_in_sel: 连datapath的alu_in_sel
-	reg_en: 连datapath的reg_en
-	alu_func: 连datapath的alu_func
-	pc_ctrl: 连datapath的pc_ctrl
-*/
 output reg en_fetch_pulse ;
 output reg en_group_pulse ;
 output reg en_pc_pulse ;
@@ -40,7 +31,7 @@ output reg alu_in_sel ;
 output reg [2:0] alu_func ;
 
 reg en_fetch_reg, en_fetch ;
-reg en_group_reg, en_group ; // group reg的写控制信号和读控制信号
+reg en_group_reg, en_group ; 
 reg en_pc_reg, en_pc ;
 reg [3:0] current_state, next_state ; 
 
@@ -55,7 +46,7 @@ parameter Execute_Or = 4'b0111 ;
 parameter Execute_Jump = 4'b1000 ;
 parameter Write_back = 4'b1001 ;
 
-always @ (posedge clk or negedge rst) begin // 有限状态机的现态与次态的转移
+always @ (posedge clk or negedge rst) begin 
 	if (!rst)
 		current_state <= Initial ;
 	else 
@@ -88,31 +79,31 @@ always @ (current_state or en_in or en1 or en2 or opcode) begin
 			endcase
 		end
 		Execute_Moveb: begin
-			if (en2) // 如果此时alu确实有数输出，证明这个状态完成了
+			if (en2) 
 				next_state = Write_back ;
 			else
 				next_state = current_state ;
 		end
 		Execute_Add: begin
-			if(en2) // 如果此时alu确实有数输出，证明这个状态完成了
+			if (en2) 
 				next_state = Write_back ;
 			else
 				next_state = current_state ;
 		end
 		Execute_Sub: begin
-			if(en2) // 如果此时alu确实有数输出，证明这个状态完成了
+			if (en2) 
 				next_state = Write_back ;
 			else
 				next_state = current_state ;
 		end
 		Execute_And: begin
-            if(en2) // 如果此时alu确实有数输出，证明这个状态完成了
+            if (en2) 
 				next_state = Write_back ;
 			else
 				next_state = current_state ;
 		end   
 		Execute_Or: begin
-			if(en2) // 如果此时alu确实有数输出，证明这个状态完成了
+			if (en2) 
                 next_state = Write_back ;
             else
                 next_state = current_state ;
@@ -123,7 +114,6 @@ always @ (current_state or en_in or en1 or en2 or opcode) begin
 	endcase
 end
 
-// 用于输出控制信号
 always @ (rst or next_state) begin
 	if (!rst) begin
 		en_fetch = 1'b0 ;
@@ -146,10 +136,10 @@ always @ (rst or next_state) begin
 				alu_func = 3'b000 ;
 			end
 			Fetch: begin
-				en_fetch = 1'b1 ;  // 此时需要取指
+				en_fetch = 1'b1 ;  
 				en_group = 1'b0 ;
 				en_pc = 1'b1 ;
-				pc_ctrl = 2'b01 ; // 取下一个指令
+				pc_ctrl = 2'b01 ; 
 				reg_en = 4'b0000 ; 
 				alu_in_sel = 1'b0 ;
 				alu_func = 3'b000 ;
@@ -260,7 +250,7 @@ always @ (en_fetch or en_fetch_reg)
 	en_fetch_pulse = en_fetch & (~en_fetch_reg) ;
 	
 always @ (en_pc_reg or en_pc)
-	en_pc_pulse = en_pc & (~en_pc_reg) ; // 此时需要读入下一个指令，且当此时指令寄存器中为空时，请求下一条指令
+	en_pc_pulse = en_pc & (~en_pc_reg) ; 
 	
 always @ (en_group_reg or en_group)
 	en_group_pulse = en_group & (~en_group_reg) ;
