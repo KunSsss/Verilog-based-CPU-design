@@ -12,14 +12,14 @@ module reg_group(
 	rd_q,
 	rs_q	
 );
-input clk, rst, en_in ; // 时钟信号，复位信号，操作四个寄存器的使能信号
-input wire [3:0] reg_en ; // 用于实例化寄存器的使能信号
-input wire [15:0] d_in ; // 输入数据
-input wire [1:0] rd, rs ; // 用于选择如何分配寄存器的值给两个输出信号，两个输出信号均有4种取值（共有四个寄存器，每个信号读取其中一个寄存器中的值）共16种
-output reg en_out ; // 输出使能
-output reg [15:0] rd_q, rs_q ; // 输出信号 目标寄存器和源寄存器
+input clk, rst, en_in ; 
+input wire [3:0] reg_en ; 
+input wire [15:0] d_in ; 
+input wire [1:0] rd, rs ; 
+output reg en_out ; 
+output reg [15:0] rd_q, rs_q ; 
 
-wire [15:0] q0, q1, q2, q3 ; // 每个寄存器的输出
+wire [15:0] q0, q1, q2, q3 ; 
 
     register reg0(
             .clk(clk),
@@ -136,7 +136,3 @@ wire [15:0] q0, q1, q2, q3 ; // 每个寄存器的输出
             else en_out <= 0 ;
         end
 endmodule               
-                        
-/* 
-    在每个时钟上升沿，确定如何将哪些寄存器中的值赋给rd_q和rs_q，rd_q和rs_q将用于给alu_a和alu_b赋值
-*/
