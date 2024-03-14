@@ -15,25 +15,9 @@ module control_unit (
 	pc_ctrl  		
 );
 
-/*
-	en: Control_Unit的使能信号
-	en_alu: alu的输出使能信号，即用于告诉control unit此时alu有输出
-	en_ram_out: RAM的输出使能信号，即用于告诉control unit此时RAM有输出
-	ins: 当前的指令
-*/
 input clk, rst, en, en_alu, en_ram_out ;	
 input [15:0] ins ;
 
-/*
-	en_ram_in: RAM输入使能，告诉RAM此时有数据输入
-	en_group_pulse: 与datapath同步时钟信号？
-	en_pc_pulse: 连datapath的en_pc_pulse
-	alu_in_sel: 连datapath的alu_in_sel
-	offset_addr: 连datapath的offset_addr
-	reg_en: 连datapath的reg_en
-	alu_func: 连datapath的alu_func
-	pc_ctrl: 连datapath的pc_ctrl
-*/
 output en_ram_in, en_group_pulse, en_pc_pulse, alu_in_sel ;	
 output reg [7:0] offset_addr ;
 output [3:0] reg_en ;
@@ -75,10 +59,3 @@ wire en_out ;
 	end
 
 endmodule
-
-
-
-
-
-
-
