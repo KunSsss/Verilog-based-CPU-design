@@ -49,7 +49,3 @@ output reg en_out ;
 		end
     end
 endmodule
-
-/*
-	根据输入alu_func的值，确定如何将两个操作数alu_a和alu_b运算得到alu_out
-*/
