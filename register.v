@@ -19,7 +19,3 @@ output reg [15:0] q ;
         else q <= q ; 
       end
 endmodule
-
-/*
-  寄存器模块，在时钟上升沿且Control Unit给出的控制信号en为高时，更新寄存器，否则锁存数据
-*/
