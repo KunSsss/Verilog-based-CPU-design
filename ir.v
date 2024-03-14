@@ -27,8 +27,3 @@ always @ (posedge clk or negedge rst) begin
 	end
 end
 endmodule
-
-/* 
-	IR: Instruction Register, 用于存放当前即将执行的指令
-	在使能有效时，将指令输出给state_transition完成状态转移
-*/
