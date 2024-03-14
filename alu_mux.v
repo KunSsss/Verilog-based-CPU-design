@@ -35,10 +35,3 @@ output reg en_out ;
 			else en_out  <= 1'b0;
     end
 endmodule
-
-/* 
-	alu_mux: 
-	用于给alu输入数据，若alu_in_sel==0，则说明只需要一个操作数
-	若alu_in_sel==1，则需要两个操作数
-	当en_in是能有效时，输出使能有效
-*/
