@@ -1,29 +1,19 @@
 module control_unit (
-	clk,
-	rst,
-	en,
-	en_alu,
-	en_ram_out,
-	ins,
-	offset_addr,
-	en_ram_in,	
-	en_group_pulse,
-	en_pc_pulse,
-	reg_en,
-	alu_in_sel,
-	alu_func,
-	pc_ctrl  		
+	input clk,
+	input rst,
+	input en,
+	input en_alu,
+	input en_ram_out,
+	input [15:0] ins,
+	output reg offset_addr,
+	output en_ram_in,	
+	output en_group_pulse,
+	output en_pc_pulse,
+	output [3:0] reg_en,
+	output alu_in_sel,
+	output [2:0] alu_func,
+	output [1:0] pc_ctrl  		
 );
-
-input clk, rst, en, en_alu, en_ram_out ;	
-input [15:0] ins ;
-
-output en_ram_in, en_group_pulse, en_pc_pulse, alu_in_sel ;	
-output reg [7:0] offset_addr ;
-output [3:0] reg_en ;
-output [2:0] alu_func ;
-output [1:0] pc_ctrl ;
-
 wire [15:0] ir_out ;
 wire en_out ;
 
