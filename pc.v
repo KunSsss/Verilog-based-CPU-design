@@ -1,19 +1,13 @@
 `timescale 1ns / 1ps
 
 module pc(
-   clk,
-   rst,       
-   en_in,
-   pc_ctrl, // 控制指令寄存器的下一曲值
-   offset_addr, 		 			 
-   pc_out  		
+   input clk,
+   input rst,       
+   input en_in,
+   input [1:0] pc_ctrl, 
+   input [7:0] offset_addr, 		 			 
+   output reg [15:0] pc_out  		
 );
-
-input clk, rst, en_in ;
-input wire [1:0] pc_ctrl ;
-input wire [7:0] offset_addr ;
-output reg [15:0] pc_out ;
-   
    always @ (posedge clk or negedge rst) begin
       if (rst == 0) pc_out <= 0 ;
       else begin
