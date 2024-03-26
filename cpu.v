@@ -1,18 +1,12 @@
 module cpu(
-	clk,
-	rst,
-	en_in,
-	en_ram_out,
-	addr,
-	ins,
-	en_ram_in 	
+	input clk,
+	input rst,
+	input en_in,
+	input en_ram_out,
+	output [15:0]addr,
+	output [15:0]ins,
+	output en_ram_in 	
 );
-
-input         clk, rst ,en_in, en_ram_out ;
-input  [15:0] ins ;
-output [15:0] addr ;
-output        en_ram_in ;
-
 wire         en_pc_pulse, en_group_pulse, alu_in_sel, en_alu ;
 wire  [1:0]  pc_ctrl ;
 wire  [3:0]  reg_en ;
