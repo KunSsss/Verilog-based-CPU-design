@@ -1,35 +1,19 @@
 module state_transition(
-	clk,
-	rst,
-	en_in,
-	en1,
-	en2,
-	rd,
-	opcode,
-	en_fetch_pulse,
-	en_group_pulse,
-	en_pc_pulse,
-	pc_ctrl,
-	reg_en,
-	alu_in_sel,
-	alu_func
+	input clk,
+	input rst,
+	input en_in,
+	input en1,
+	input en2,
+	input [1:0] rd,
+	input [3:0] opcode,
+	output reg en_fetch_pulse,
+	output reg en_group_pulse,
+	output reg en_pc_pulse,
+	output reg [1:0] pc_ctrl,
+	output reg [3:0] reg_en,
+	output reg alu_in_sel,
+	output reg [2:0] alu_func
 );
-
-input clk, rst ;
-input en_in ; 
-input en1 ; 
-input en2 ; 
-input [1:0] rd ; 
-input [3:0] opcode ; 
-
-output reg en_fetch_pulse ;
-output reg en_group_pulse ;
-output reg en_pc_pulse ;
-output reg [1:0] pc_ctrl;
-output reg [3:0] reg_en ;
-output reg alu_in_sel ;
-output reg [2:0] alu_func ;
-
 reg en_fetch_reg, en_fetch ;
 reg en_group_reg, en_group ; 
 reg en_pc_reg, en_pc ;
