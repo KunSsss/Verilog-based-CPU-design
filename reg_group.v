@@ -1,24 +1,17 @@
 `timescale 1ns / 1ps
 
 module reg_group(
-    clk,       
-    rst,	
-	en_in,		
-	reg_en,		
-	d_in,		
-	rd,
-    rs,		
-	en_out,		
-	rd_q,
-	rs_q	
+    input clk,       
+    input rst,	
+    input en_in,		
+    input [3:0] reg_en,		
+    input [15:0] d_in,		
+    input [1:0] rd,
+    input [1:0] rs,		
+    output reg en_out,		
+    output reg [15:0] rd_q,
+    output reg [15:0] rs_q	
 );
-input clk, rst, en_in ; 
-input wire [3:0] reg_en ; 
-input wire [15:0] d_in ; 
-input wire [1:0] rd, rs ; 
-output reg en_out ; 
-output reg [15:0] rd_q, rs_q ; 
-
 wire [15:0] q0, q1, q2, q3 ; 
 
     register reg0(
