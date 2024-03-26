@@ -9,22 +9,15 @@
 `define rightshift  3'b110
 
 module alu (
-	clk, 
-	rst, 
-	en_in, 
-	alu_a, 
-	alu_b, 
-	alu_func, 
-	en_out, 
-	alu_out
+	input clk, 
+	input rst, 
+	input en_in, 
+	input [15:0] alu_a, 
+	input [15:0] alu_b, 
+	input [2:0] alu_func, 
+	output reg en_out, 
+	output reg [15:0] alu_out
 );
-
-input  [15:0] alu_a, alu_b ;
-input  clk, rst, en_in ;
-input  [2:0] alu_func ;
-output reg [15:0] alu_out ;
-output reg en_out ;
-
 	always @ (negedge rst or posedge clk) begin
 		if (rst == 1'b0) begin
 			alu_out <= 16'b0000_0000_0000_0000 ;
