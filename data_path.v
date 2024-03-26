@@ -1,28 +1,19 @@
 module data_path (
-	clk, 
-	rst,
-	offset_addr,	
-	en_pc_pulse,
-	pc_ctrl, 
-	offset, 
-	en_in,
-	reg_en,	
-	alu_in_sel,
-	alu_func, 
-	en_out,	
-	pc_out,
-	rd,
-	rs		
+	input clk, 
+	input rst,
+	input [7:0] offset_addr,	
+	input en_pc_pulse,
+	input [1:0]pc_ctrl, 
+	input [7:0] offset, 
+	input en_in,
+	input [3:0]reg_en,	
+	input alu_in_sel,
+	input [2:0]alu_func, 
+	output en_out,	
+	output [15:0]pc_out,
+	input [1:0]rd,
+	input [1:0]rs		
 );
-
-input clk, rst, en_pc_pulse, en_in, alu_in_sel ;
-input [7:0] offset_addr, offset ;
-input [1:0] pc_ctrl, rd, rs ;
-input [3:0] reg_en ;
-input [2:0] alu_func ;
-output en_out ;
-output [15:0] pc_out ;
-
 wire [15:0] rd_q, rs_q, alu_a, alu_b, alu_out ;	
 wire en_out_group, en_out_alu_mux ;  
 
